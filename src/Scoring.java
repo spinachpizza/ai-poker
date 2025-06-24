@@ -1,12 +1,10 @@
-public class PokerHands {
-
-    public static int highestValue;
-    public static int first, last;
+public class Scoring {
 
 
+    private int highestValue;
 
     //Creates a new array and counts how many times each number occurs
-    public static int[] countArray(String[] cardArray) {
+    public int[] countArray(String[] cardArray) {
 
         int[] numbers = new int[14];
         for(int i=0; i<cardArray.length; i++) {
@@ -19,7 +17,7 @@ public class PokerHands {
     }
 
 
-    public static int getMaxValue(String[] cardArray)
+    public int getMaxValue(String[] cardArray)
     {
         int maxValue = 0;
         for(int i=0; i<cardArray.length; i++)
@@ -35,7 +33,7 @@ public class PokerHands {
 
 
     //Converts char value to int value
-    public static int convert(char c) {
+    public int convert(char c) {
 
         if(c == 'j') {return 11;}
         else if(c == 'q') {return 12;}
@@ -47,7 +45,7 @@ public class PokerHands {
 
 
     //Converts int to name
-    public static String getCardName(int n)
+    public String getCardName(int n)
     {
         if(n == 14) {return "ACE";}
         else if(n==13) {return "KING";}
@@ -59,7 +57,7 @@ public class PokerHands {
 
 
     //Returns true if theres at least 1 pair
-    public static boolean checkPair(String[] cardArray) {
+    public boolean checkPair(String[] cardArray) {
 
         int[] numberArray = countArray(cardArray);
 
@@ -74,7 +72,7 @@ public class PokerHands {
     }
 
     //Returns true if theres a set of 3 cards
-    public static boolean checkThree(String[] cardArray) {
+    public boolean checkThree(String[] cardArray) {
 
         int[] numberArray = countArray(cardArray);
 
@@ -90,7 +88,7 @@ public class PokerHands {
 
 
     //Returns true if theres a set of 4 cards
-    public static boolean checkFour(String[] cardArray) {
+    public boolean checkFour(String[] cardArray) {
 
         int[] numberArray = countArray(cardArray);
 
@@ -106,7 +104,7 @@ public class PokerHands {
 
 
     //Returns true if theres 2 pairs
-    public static boolean checkTwoPair(String[] cardArray) {
+    public boolean checkTwoPair(String[] cardArray) {
 
         int highestValue = 0;
         //Counts how many pairs
@@ -129,7 +127,7 @@ public class PokerHands {
 
 
     //Returns true if theres a full house
-    public static boolean checkFullHouse(String[] cardArray) {
+    public boolean checkFullHouse(String[] cardArray) {
 
         int highestValue = 0;
 
@@ -168,7 +166,7 @@ public class PokerHands {
 
 
     //Returns true if the cards contain a flush
-    public static boolean checkFlush(String[] cardArray) {
+    public boolean checkFlush(String[] cardArray) {
 
         char suit = ' ';
         //Iterates through array and counts each suit
@@ -207,7 +205,7 @@ public class PokerHands {
 
 
     //Returns true if the cards contain a straight
-    public static boolean checkStraight(String[] cardArray) {
+    public boolean checkStraight(String[] cardArray) {
 
         int[] cardCount = countArray(cardArray);
         int count = 0; //Count how many in a row
@@ -232,7 +230,7 @@ public class PokerHands {
 
 
     //Produces new array containing the 5 cards wanted from a straight
-    public static String[] keepBestFive(String[] cardArray) {
+    public String[] keepBestFive(String[] cardArray) {
 
         int first = 0;
 
@@ -256,7 +254,7 @@ public class PokerHands {
             {
                 //Build new array with those 5 cards
                 String[] newArray = new String[5];
-                for(int j=0; j<5; i++)
+                for(int j=0; j<5; j++)
                 {
                     newArray[j] = cardArray[first+j];
                 }
@@ -273,7 +271,7 @@ public class PokerHands {
 
 
 
-    public static String[] sortArray(String[] cardArray) {
+    public String[] sortArray(String[] cardArray) {
 
         for(int i=0; i<cardArray.length - 1; i++) {
             for(int j=0; j<cardArray.length - 1; j++) {
@@ -295,13 +293,18 @@ public class PokerHands {
 
 
     //Returns value of cards in terms of poker hands
-    public static int getCardValue(String[] cards) {
-        
+    public int getCardValue(String[] cards) {
 
+        if(cards == null || cards.length == 0) {
+            return 0;
+        }
+        
+        highestValue = 0;
         int value = 0;
 
         //Keeps just the card numbers and sorts it
         String[] newCardArray = sortArray(cards);
+
         
 
         //Check for royal flush
@@ -350,7 +353,7 @@ public class PokerHands {
 
 
 
-    public static String valueToName(int value) {
+    public String valueToName(int value) {
 
         if(value >= 100 && value < 200) {
             return getCardName(value-100) + " HIGH";
@@ -384,7 +387,4 @@ public class PokerHands {
         }
         return null;
     }
-
-
-
 }
